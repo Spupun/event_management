@@ -1,7 +1,6 @@
 <?php
 
 include "config.php";
-
 if (isset($_POST['submit'])) {
     $image_title = $_POST['image_title'];
     $image = $_FILES['image']['name'];
