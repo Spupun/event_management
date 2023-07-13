@@ -69,36 +69,28 @@ include "config.php";
                 </tr>
             </thead>
             <tbody>
-                <?php
+                                <?php
                 $sql = "SELECT * FROM `services` where is_deleted =0";
                 $result = mysqli_query($conn, $sql);
                 if ($result && mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $id = $row['id'];
-                        $our_service = $row['our_service'];
-                        $service_desc = $row['service_desc'];
-                        $image = $row['image'];
-
-                        echo '<tr>
-                            <th scope="row">' . $id . '</th>
-                            <td>' . $our_service . '</td>
-                            <td>' . $service_desc . '</td>
-                            <td><img src="image/'. $image . '" alt="image"></td>
-                            <td>
-                                <button class="btn btn-primary"><a href="update_service.php?updateid=' . $id . '">Update</a></button>
-                                <button class="btn btn-danger"><a href="delete_service.php?deleteid=' . $id . '">Delete</a></button>
-                            </td>
-                        </tr>';
-                    }
-                } else {
-                    echo '<tr><td colspan="6">No users found.</td></tr>';
-                }
+                    foreach ($result as $key => $value) {
                 ?>
-            </tbody>
-        </table>
-    </div>
-    <button class="btn btn-primary ml-2"><a href="admin_home.php">Go to home page</a></button>
+                        <tr>
+                            <td><?= $value['id'] ?></td>
+                            <td><?= $value['our_service'] ?></td>
+                            <td><?= $value['service_desc'] ?></td>
+                            <td><?= $value['our_service'] ?></td>
+                            <td><img src="image/<?= $value['image'] ?>" alt="image"></td>
+                            <td>
+                                <a href="update_service.php?updateid=<?= $value['id'] ?>" class="btn btn-primary text-light">Update</a>
+                                <a href="delete_service.php?deleteid=<?= $value['id'] ?>" class="btn btn-danger text-light">Delete</a>
 
+                            </td>
+
+                        </tr>
+
+                <?php }
+                } ?>
 </body>
 
 </html>
