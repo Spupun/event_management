@@ -3,26 +3,26 @@
 include "config.php";
 
 if (isset($_POST['submit'])) {
-    $job_vacancies = $_POST['job_vacancies'];
-    $job_desc = $_POST['job_desc'];
-    $qualification = $_POST['qualification'];
-    $experience = $_POST['experience'];
-    $location = $_POST['location'];
+    $image_title = $_POST['image_title'];
+    $image = $_FILES['image']['name'];
+    $image_desc = $_POST['image_desc'];
 
 
 
-    $sql = "INSERT INTO carrier(job_vacancies,job_desc,qualification,experience,location) VALUES ('$job_vacancies', '$job_desc', '$qualification', '$experience','$location')";
+    $sql = "INSERT INTO image(image_title,image,image_desc) VALUES ('$image_title', '$image', '$image_desc')";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        header('location:view_job.php');
+       // header('location:view_job.php');
+       echo "<script>alert('Image inserted succefully')</script>";
+       move_uploaded_file($_FILES['image']['tmp_name'], "image/$image");
+
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 }
 
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <title>Add Job</title>
+    <title>Add Image</title>
 </head>
 
 <body>
@@ -40,24 +40,16 @@ if (isset($_POST['submit'])) {
 
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label>Job Vacancies</label>
-                <input type="text" class="form-control" name="job_vacancies" placeholder="Enter job details" autocomplete="off" required>
+                <label>Image Title</label>
+                <input type="text" class="form-control" name="image_title" placeholder="Enter image title" autocomplete="off" required>
             </div>
             <div class="form-group">
-                <label>Job_desc</label>
-                <input type="text" class="form-control" name="job_desc" placeholder="Enter job description" autocomplete="off" required>
+                <label>Image</label>
+                <input type="file" class="form-control" name="image" placeholder="upload image" autocomplete="off" required>
             </div>
             <div class="form-group">
-                <label>Qualification</label>
-                <input type="text" class="form-control" name="qualification" placeholder="Enter qualification" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label>Experience</label>
-                <input type="text" class="form-control" name="experience" placeholder="Enter experience" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label>Location</label>
-                <input type="text" class="form-control" placeholder="Enter location" name="location" autocomplete="off" required>
+                <label>Image_desc</label>
+                <input type="text" class="form-control" name="image_desc" placeholder="Enter image desc" autocomplete="off" required>
             </div>
 
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -65,14 +57,6 @@ if (isset($_POST['submit'])) {
 
     </div>
 
-
-
-
-
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 </body>
 
