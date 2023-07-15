@@ -1,7 +1,6 @@
 <?php
 
 include "config.php";
-
 if (isset($_POST['submit'])) {
    $event_name = $_POST['event_name'];
    $event_desc = $_POST['event_desc'];
