@@ -91,7 +91,9 @@ include "config.php";
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM `upcoming_events` where move_past =1";
+                $currentDate = date("Y-m-d");
+
+                $sql = "SELECT * FROM `upcoming_events` where move_past =1 AND `date` < '$currentDate'";
                 //$count =0;
                 $result = mysqli_query($conn, $sql);
                 if ($result && mysqli_num_rows($result) > 0) {
@@ -105,14 +107,6 @@ include "config.php";
                             <td><?= $value['event_desc'] ?></td>
                             <td><img src="image/<?= $value['image'] ?>" alt="image"></td>
                             <td><?= $value['date'] ?></td>
-                            <!-- <td>
-                                <a href="update_event.php?updateid=<?= $value['id'] ?>" class="btn btn-primary text-light">Update</a>
-                                <a href="delete_event.php?deleteid=<?= $value['id'] ?>" class="btn btn-danger text-light">Delete</a>
-                            </td> -->
-                            <!-- <td>
-                                <a href="past_event.php?pastid=<?= $value['id'] ?>" class="btn btn-info text-light">Move to past</a>
-
-                            </td> -->
                         </tr>
                 <?php }
                 } ?>
