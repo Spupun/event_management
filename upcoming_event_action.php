@@ -1,13 +1,15 @@
 <?php
 
 include "config.php";
+
 if (isset($_POST['submit'])) {
    $event_name = $_POST['event_name'];
    $event_desc = $_POST['event_desc'];
    $image = $_FILES['image']['name'];
    $date=$_POST['date'];
+   
 
-   $sql = "INSERT INTO `upcoming_events`(event_name, event_desc,image,date) VALUES ('$event_name', '$event_desc', '$image', '$date')";
+   $sql = "INSERT INTO `upcoming_events`(event_name, event_desc,image,date,move_past) VALUES ('$event_name', '$event_desc', '$image', '$date', 1)";
 
    $result = mysqli_query($conn, $sql);
 
