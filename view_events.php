@@ -92,8 +92,9 @@ include "config.php";
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT * FROM `upcoming_events` where is_deleted =0";
-                //$count =0;
+
+                $currentDate = date("Y-m-d");
+                $sql = "SELECT * FROM `upcoming_events` WHERE is_deleted = 0 AND `date` >= '$currentDate'";
                 $result = mysqli_query($conn, $sql);
                 if ($result && mysqli_num_rows($result) > 0) {
                     foreach ($result as $key => $value) {
@@ -111,18 +112,21 @@ include "config.php";
                                 <a href="delete_event.php?deleteid=<?= $value['id'] ?>" class="btn btn-danger text-light">Delete</a>
                             </td>
                             <td>
-                                <a href="past_event.php?pastid=<?= $value['id'] ?>" class="btn btn-info text-light">Move to past</a>
+                                <a href="past.php?pastid=<?= $value['id'] ?>" class="btn btn-info text-light">Move to past</a>
 
                             </td>
                         </tr>
                 <?php }
                 } ?>
+
             </tbody>
-        </table>
+            </table>
+        
     </div>
     <button class="btn btn-primary ml-2"><a href="admin_home.php">Back</a></button>
 
 </body>
+
 
 </html>
 
